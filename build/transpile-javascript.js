@@ -7,6 +7,7 @@ const rollup = require('rollup')
 const babel = require('rollup-plugin-babel')
 const commonjs = require('rollup-plugin-commonjs')
 const resolve = require('rollup-plugin-node-resolve')
+const sourcemaps = require('rollup-plugin-sourcemaps')
 
 let cache
 
@@ -19,6 +20,7 @@ entries.forEach(entry =>
     entry,
     cache,
     plugins: [
+      sourcemaps(),
       resolve({ jsnext: true }),
       commonjs(),
       babel()
@@ -29,7 +31,8 @@ entries.forEach(entry =>
       intro,
       format: 'iife',
       dest: `dist/${entry}`,
-      sourceMap: process.env !== 'production'
+      sourceMap: process.env !== 'production',
+      sourceMapFile: `dist/${entry}`
     })
   })
   .catch(console.error)

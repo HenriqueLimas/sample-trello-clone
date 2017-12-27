@@ -10,7 +10,7 @@
     "build-css": "node build/transpile-styles.js",
     "build": "npm run build-js && npm run build-css",
     "watch": "npm-watch",
-    "dev": "npm run build && parallelshell \"npm run watch\" \"npm run serve\"",
+    "dev": "npm run clean && npm run build && parallelshell \"npm run watch\" \"npm run serve\"",
     "serve": "nodemon -e js server/index.js",
     "start": "node server/index.js"
   },
@@ -36,14 +36,14 @@
     "babel-preset-es2015-rollup": "^3.0.0",
     "copy": "^0.3.0",
     "mkdirp": "^0.5.1",
+    "node-sass": "^4.7.2",
     "npm-watch": "^0.1.9",
     "parallelshell": "^3.0.1",
-    "postcss": "^6.0.2",
-    "postcss-cssnext": "^2.11.0",
     "rollup": "^0.43.0",
     "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-commonjs": "^8.2.0",
-    "rollup-plugin-node-resolve": "^3.0.0"
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-sourcemaps": "^0.4.2"
   },
   "author": "",
   "license": "ISC",
