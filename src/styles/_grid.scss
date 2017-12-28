@@ -1,0 +1,19 @@
+.container {
+  @include make-container();
+}
+
+.row {
+  @include make-row();
+}
+
+@each $breakpoint in map-keys($breakpoints) {
+  $media-size: map-get($breakpoints, $breakpoint);
+
+  @media (min-width: $media-size) {
+    @for $i from 1 through $grid-columns {
+      .col-#{$breakpoint}-#{$i} {
+        @include make-col($i, $grid-columns);
+      }
+    }
+  }
+}

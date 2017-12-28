@@ -1,0 +1,27 @@
+@mixin make-container() {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: ($gutter / 2);
+  padding-right: ($gutter / 2);
+
+
+  // Clearing context
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin make-row() {
+  width: 100%;
+  margin-left: ($gutter / -2);
+  margin-right: ($gutter / -2);
+}
+
+@mixin make-col($size, $columns: $grid-columns) {
+  position: relative;
+  float: left;
+  width: percentage(($size / $columns));
+}

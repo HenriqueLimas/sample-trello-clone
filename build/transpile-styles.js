@@ -40,13 +40,16 @@ mkdirp(DIST_PATH, err => {
 
   Promise.all(appShellEntries.map(processCss))
     .then(writeFile('app-shell'))
+    .then(() => console.log('App shell generated with success!'))
     .catch(console.error)
 
-  styles
-    .map(entry =>
-      processCss(entry)
-      .then(result => writeFile(entry)([result]))
-        .catch(err =>
-          console.error(`Error on ${entry}: `, err))
-    )
+  Promise.all(
+    styles
+      .map(entry =>
+        processCss(entry)
+        .then(result => writeFile(entry)([result]))
+        .catch(err => console.error(`Error on ${entry}: `, err))
+      )
+  )
+  .then(() => console.log('Styles generated with success!'))
 })

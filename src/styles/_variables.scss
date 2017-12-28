@@ -1,0 +1,14 @@
+// Grid columns
+//
+// Set the number of columns and gutter size
+
+$gutter: 30px;
+$grid-columns: 12;
+
+$breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+);

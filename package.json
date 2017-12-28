@@ -25,7 +25,7 @@
       "patterns": [
         "src"
       ],
-      "extensions": "css"
+      "extensions": "scss"
     },
     "cp-html": "index.html"
   },
