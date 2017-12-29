@@ -1,0 +1,28 @@
+@mixin font-styles() {
+  font-family: $font-family;
+  font-size: $font-size;
+}
+
+@mixin h1-styles() {
+  font-size: $h1-font-size;
+}
+
+@mixin h2-styles() {
+  font-size: $h2-font-size;
+}
+
+@mixin h3-styles() {
+  font-size: $h3-font-size;
+}
+
+@mixin h4-styles() {
+  font-size: $h4-font-size;
+}
+
+@mixin h5-styles() {
+  font-size: $h5-font-size;
+}
+
+@mixin h6-styles() {
+  font-size: $h6-font-size;
+}

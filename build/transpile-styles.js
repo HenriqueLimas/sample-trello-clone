@@ -10,7 +10,9 @@ const appShellEntries = [
   'app-shell'
 ]
 
-const styles = []
+const components = [
+  'components/Header'
+]
 
 const processCss = entry =>
   new Promise((resolve, reject) => {
@@ -42,9 +44,13 @@ mkdirp(DIST_PATH, err => {
     .then(writeFile('app-shell'))
     .then(() => console.log('App shell generated with success!'))
     .catch(console.error)
+})
+
+mkdirp(DIST_PATH + '/components', err => {
+  if (err) return console.error(err)
 
   Promise.all(
-    styles
+    components
       .map(entry =>
         processCss(entry)
         .then(result => writeFile(entry)([result]))

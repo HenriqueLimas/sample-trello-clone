@@ -1,2 +1,2 @@
-let i = 42
-console.log(42)
+import './TrelloClone'
+import './components/Header'

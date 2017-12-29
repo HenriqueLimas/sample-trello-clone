@@ -1,0 +1,26 @@
+@import "../variables";
+@import "../mixins/fonts";
+@import "../mixins/content-box";
+
+:host {
+  @include font-styles;
+}
+
+$header-height: 30px;
+
+header {
+  width: 100%;
+  height: $header-height;
+
+  background-color: $secondary;
+}
+
+.logo {
+  @include h5-styles;
+
+  color: $third;
+  margin: 0 auto;
+  max-width: 150px;
+  text-align: center;
+  line-height: $header-height;
+}
