@@ -12,4 +12,12 @@ export default class Base {
   get table() {
     return this.db.getSchema().table(this.tableName)
   }
+
+  observe(query, handler) {
+    this.db.observe(query, handler)
+  }
+
+  unobserve(query, handler) {
+    this.db.unobserve(query, handler)
+  }
 }

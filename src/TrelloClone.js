@@ -14,6 +14,8 @@ class TrelloClone extends ShadowElement {
   render() {
     this.update(`
       <tc-header></tc-header>
+
+      <tc-boards></tc-boards>
     `)
   }
 }
