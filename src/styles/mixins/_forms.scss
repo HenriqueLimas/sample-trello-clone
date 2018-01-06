@@ -1,0 +1,11 @@
+@import '../variables';
+
+@mixin input {
+  font-size: $font-size;
+  background-color: transparent;
+  border: 1px solid $border-color;
+  border-radius: 6px;
+  padding: 3px;
+  width: 100%;
+  max-width: 300px;
+}

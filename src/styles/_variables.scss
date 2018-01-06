@@ -18,10 +18,12 @@ $breakpoints: (
 // Colors
 //
 $white: #fff;
+$black: #000;
 $gray: #e2e4e6;
 $primary: transparentize($white, 0.3);
 $secondary: #026aa7;
 $third: #0079bf;
+$border-color: #afafaf;
 
 //
 // Fonts
@@ -30,6 +32,7 @@ $font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
 
 $font-family: $font-family-sans-serif !default;
 $font-size: 1em !default;
+$font-size-sm: 0.8em !default;
 
 $h1-font-size: $font-size * 2.5 !default;
 $h2-font-size: $font-size * 2 !default;
@@ -42,7 +45,7 @@ $h6-font-size: $font-size !default;
 // Paddings
 //
 $main-padding: 25px;
-$inner-padding: 30px;
+$inner-padding: 8px;
 
 //
 // Borders

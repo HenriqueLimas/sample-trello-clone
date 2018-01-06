@@ -1,5 +1,6 @@
 @import '../mixins/reboot';
 @import '../mixins/list';
+@import '../mixins/cards';
 @import '../variables';
 @import '../grid';
 
@@ -16,11 +17,7 @@
   }
 
   .board {
-    color: $white;
-    margin-top: $gutter / 2;
-    padding: $inner-padding;
-    background-color: $third;
-    border-radius: $border-radius;
+    @include card-board();
   }
 
   .list {

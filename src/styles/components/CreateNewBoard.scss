@@ -1,22 +1,44 @@
+@import '../mixins/reboot';
+@import '../mixins/cards';
+@import '../mixins/forms';
 @import '../variables';
 
-form, a {
-  display: none;
-}
+@include reboot() {
+  :host {
+    width: 100%;
+    font-size: $font-size-sm;
+  }
 
-.visible {
-  display: block;
-}
+  a:visited {
+    color: $black;
+  }
 
-.board {
-  margin-top: $gutter / 2;
-  border-radius: $border-radius;
-  padding: $inner-padding;
-  background-color: $gray;
-}
+  form, .create-new-board {
+    display: none;
+  }
 
-input {
-  font-size: $font-size;
-  background-color: transparent;
-  -webkit-appearence: none;
+  .visible {
+    display: block;
+  }
+
+  .board {
+    @include card-board($gray);
+
+    color: $black;
+    text-align: center;
+    height: 65px;
+    width: inherit;
+  }
+
+  input {
+    @include input;
+  }
+
+  .form-actions {
+    margin-top: 10px;
+  }
+
+  .add {
+    margin-right: 3px;
+  }
 }

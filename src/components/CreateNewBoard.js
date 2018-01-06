@@ -5,9 +5,11 @@ class CreateNewBoard extends ShadowElement {
     super()
 
     this.$ = {
-      board: null,
+      text: null,
       form: null,
-      input: null
+      input: null,
+      add: null,
+      cancel: null
     }
 
     this.isAdding = false
@@ -28,12 +30,16 @@ class CreateNewBoard extends ShadowElement {
   connectedCallback() {
     this.render()
 
-    this.$.text = this.shadowRoot.querySelector('a')
+    this.$.text = this.shadowRoot.querySelector('.js-create-new-board')
     this.$.form = this.shadowRoot.querySelector('form')
     this.$.input = this.shadowRoot.querySelector('input')
+    this.$.cancel = this.shadowRoot.querySelector('.js-cancel')
+    this.$.add = this.shadowRoot.querySelector('.js-add')
 
     this.$.form.addEventListener('submit', this.handleForm)
+    this.$.add.addEventListener('click', this.handleForm)
     this.$.text.addEventListener('click', this.toggleIsAdding)
+    this.$.cancel.addEventListener('click', this.toggleIsAdding)
   }
 
   handleForm(event) {
@@ -58,6 +64,10 @@ class CreateNewBoard extends ShadowElement {
     this.isAdding = !this.isAdding
 
     this.render()
+
+    if (this.isAdding) {
+      this.$.input.focus()
+    }
   }
 
   render() {
@@ -67,9 +77,13 @@ class CreateNewBoard extends ShadowElement {
       <div class="board">
         <form class="${this.isAdding ? 'visible' : ''}">
           <input name="name" type="text" />
+          <div class="form-actions">
+            <a class="add js-add" href="#">Add</a>
+            <a class="cancel js-cancel" href="#">Cancel</a>
+          </div>
         </form>
 
-        <a class="${this.isAdding ? '' : 'visible'}" href="#">Create new board...</a>
+        <a class="create-new-board js-create-new-board ${this.isAdding ? '' : 'visible'}" href="#">Create new board...</a>
       </div>
     `)
   }

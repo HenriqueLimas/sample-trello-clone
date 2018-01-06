@@ -1,0 +1,10 @@
+@import '../variables';
+
+@mixin card-board($color:$third) {
+  background-color: $color;
+  border-radius: $border-radius;
+  color: $white;
+  margin-bottom: $gutter / 2;
+  min-height: 65px;
+  padding: $inner-padding;
+}
