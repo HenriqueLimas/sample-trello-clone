@@ -1,35 +1,47 @@
-import events, { actions } from '../utils/events'
-import { globals } from '../commons'
-
 import ShadowElement from './ShadowElement'
 
 class Boards extends ShadowElement {
   constructor() {
     super()
 
+    this.$ = {
+      db: null
+    }
+
     this.boards = []
 
+    this._init = this._init.bind(this)
     this.render = this.render.bind(this)
     this.updateBoards = this.updateBoards.bind(this)
   }
 
-  get model() {
-    return globals().boards
+  get query() {
+    if (!this.$.db) {
+      this.$.db = document.querySelector('trello-clone').db
+    }
+
+    return this.$.db
   }
 
   connectedCallback() {
-    events.on(actions.GLOBALS_READY, () => {
-      const query = this.model.getAll()
+    this.query.addEventListener(this.query.events.INITIALIZED, this._init)
+  }
 
-      this.model.observe(query, this.updateBoards)
+  _init() {
+    this.query.observeBoards(this.updateBoards)
 
-      query.exec()
-        .then(results => {
-          this.boards = results
+    this.query.fetchBoards()
+      .then(results => {
+        this.boards = results
 
-          this.render()
-        })
-    })
+        this.render()
+      })
+
+    this.query.removeEventListener(this.query.events.INITIALIZED, this._init)
+  }
+
+  disconnectedCallback() {
+    this.query.unobserveBoards(this.updateBoards)
   }
 
   updateBoards(changes) {
@@ -42,15 +54,19 @@ class Boards extends ShadowElement {
 
   render() {
     this.update(`
-      <section class="boards">
+      <link rel="stylesheet" href="/styles/components/Boards.css">
+
+      <section class="boards container">
         <h1>Boards</h1>
 
-        <main class="list">
+        <main class="list row">
           ${this.boards.map(board => `
-            <div class="board">
-              <p class="board__name js-board__name">
-                ${board.name}
-              </p>
+            <div class="col-xs-12 col-md-2">
+              <div class="board">
+                <p class="board__name js-board__name">
+                  ${board.name}
+                </p>
+              </div>
             </div>
           `)}
         </main>

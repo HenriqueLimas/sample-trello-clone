@@ -1,0 +1,23 @@
+@import '../mixins/reboot';
+@import '../variables';
+@import '../grid';
+
+@include reboot() {
+  :host {
+    font-family: $font-family;
+    font-size: $font-size;
+  }
+
+  .boards {
+    padding: $main-padding;
+    max-width: $container-max-width;
+    margin: auto;
+  }
+
+  .board {
+    margin-top: 5px;
+    padding: $inner-padding;
+    background-color: $third;
+    border-radius: $border-radius;
+  }
+}

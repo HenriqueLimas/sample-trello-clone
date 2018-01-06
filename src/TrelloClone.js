@@ -4,6 +4,10 @@ class TrelloClone extends ShadowElement {
   constructor() {
     super()
 
+    this.$ = {
+      db: null
+    }
+
     this.render = this.render.bind(this)
   }
 
@@ -11,11 +15,21 @@ class TrelloClone extends ShadowElement {
     this.render()
   }
 
+  get db() {
+    if (!this.$.db) {
+      this.$.db = this.shadowRoot.querySelector('trello-query')
+    }
+
+    return this.$.db
+  }
+
   render() {
     this.update(`
       <tc-header></tc-header>
 
       <tc-boards></tc-boards>
+
+      <trello-query></trello-query>
     `)
   }
 }

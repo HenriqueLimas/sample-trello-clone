@@ -1,0 +1,7 @@
+@mixin reboot() {
+  * {
+    box-sizing: border-box;
+  }
+
+  @content;
+}

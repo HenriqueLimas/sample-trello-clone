@@ -2,8 +2,9 @@
 //
 // Set the number of columns and gutter size
 
-$gutter: 30px;
+$gutter: 20px;
 $grid-columns: 12;
+$container-max-width: 800px;
 
 $breakpoints: (
   xs: 0,
@@ -35,3 +36,14 @@ $h3-font-size: $font-size * 1.75 !default;
 $h4-font-size: $font-size * 1.5 !default;
 $h5-font-size: $font-size * 1.25 !default;
 $h6-font-size: $font-size !default;
+
+//
+// Paddings
+//
+$main-padding: 25px;
+$inner-padding: 15px;
+
+//
+// Borders
+//
+$border-radius: 6px;
