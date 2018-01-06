@@ -18,6 +18,7 @@ $breakpoints: (
 // Colors
 //
 $white: #fff;
+$gray: #e2e4e6;
 $primary: transparentize($white, 0.3);
 $secondary: #026aa7;
 $third: #0079bf;
@@ -41,7 +42,7 @@ $h6-font-size: $font-size !default;
 // Paddings
 //
 $main-padding: 25px;
-$inner-padding: 15px;
+$inner-padding: 30px;
 
 //
 // Borders

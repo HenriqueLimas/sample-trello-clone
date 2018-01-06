@@ -62,14 +62,18 @@ class Boards extends ShadowElement {
         <main>
           <ul class="list row">
             ${this.boards.map(board => `
-              <li class="item col-xs-12 col-md-3">
+              <li class="item col-xs-12 col-md-6 col-lg-3">
                 <div class="board">
-                  <p class="board__name js-board__name">
+                  <span class="board__name js-board__name">
                     ${board.name}
-                  </p>
+                  </span>
                 </div>
               </li>
-            `)}
+            `).join('')}
+
+            <li class="item col-xs-12 col-md-6 col-lg-3">
+              <tc-create-new-board></tc-create-new-board>
+            </li>
           </ul>
         </main>
       </section>

@@ -13,11 +13,10 @@ export default class Boards extends Base {
     return this.db.select().from(this.table)
   }
 
-  add({ name, description }) {
+  add({ name }) {
     const row = this.table.createRow({
       id_board: uuid(),
-      name,
-      description
+      name
     })
 
     return this.db.insertOrReplace().into(this.table).values([row]).exec();

@@ -17,7 +17,7 @@
 
   .board {
     color: $white;
-    margin-top: 5px;
+    margin-top: $gutter / 2;
     padding: $inner-padding;
     background-color: $third;
     border-radius: $border-radius;

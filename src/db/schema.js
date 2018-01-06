@@ -12,7 +12,6 @@ const initializeSchema = db => {
   schema.createTable(tables.BOARDS)
     .addColumn('id_board', db.Type.STRING)
     .addColumn('name', db.Type.STRING)
-    .addColumn('description', db.Type.STRING)
     .addPrimaryKey(['id_board'])
 
   return schema

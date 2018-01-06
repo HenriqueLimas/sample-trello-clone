@@ -62,6 +62,10 @@ class TrelloQuery extends HTMLElement {
       return results
     })
   }
+
+  addBoard({ name }) {
+    return this.boards.add({ name })
+  }
 }
 
 window.customElements.define('trello-query', TrelloQuery)

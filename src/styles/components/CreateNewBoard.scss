@@ -1,0 +1,22 @@
+@import '../variables';
+
+form, a {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
+.board {
+  margin-top: $gutter / 2;
+  border-radius: $border-radius;
+  padding: $inner-padding;
+  background-color: $gray;
+}
+
+input {
+  font-size: $font-size;
+  background-color: transparent;
+  -webkit-appearence: none;
+}
