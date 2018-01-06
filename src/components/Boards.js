@@ -59,16 +59,18 @@ class Boards extends ShadowElement {
       <section class="boards container">
         <h1>Boards</h1>
 
-        <main class="list row">
-          ${this.boards.map(board => `
-            <div class="col-xs-12 col-md-2">
-              <div class="board">
-                <p class="board__name js-board__name">
-                  ${board.name}
-                </p>
-              </div>
-            </div>
-          `)}
+        <main>
+          <ul class="list row">
+            ${this.boards.map(board => `
+              <li class="item col-xs-12 col-md-3">
+                <div class="board">
+                  <p class="board__name js-board__name">
+                    ${board.name}
+                  </p>
+                </div>
+              </li>
+            `)}
+          </ul>
         </main>
       </section>
     `)

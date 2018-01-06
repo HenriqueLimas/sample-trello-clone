@@ -4,7 +4,7 @@
 
 $gutter: 20px;
 $grid-columns: 12;
-$container-max-width: 800px;
+$container-max-width: 1250px;
 
 $breakpoints: (
   xs: 0,
@@ -18,9 +18,9 @@ $breakpoints: (
 // Colors
 //
 $white: #fff;
-$primary: #0079bf;
+$primary: transparentize($white, 0.3);
 $secondary: #026aa7;
-$third: transparentize($white, 0.3);
+$third: #0079bf;
 
 //
 // Fonts

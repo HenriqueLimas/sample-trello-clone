@@ -1,4 +1,5 @@
 @import '../mixins/reboot';
+@import '../mixins/list';
 @import '../variables';
 @import '../grid';
 
@@ -15,9 +16,14 @@
   }
 
   .board {
+    color: $white;
     margin-top: 5px;
     padding: $inner-padding;
     background-color: $third;
     border-radius: $border-radius;
+  }
+
+  .list {
+    @include remove-ul-styles;
   }
 }
