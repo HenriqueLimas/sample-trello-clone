@@ -13,7 +13,11 @@ class Boards extends ShadowElement {
   }
 
   connectedCallback() {
-    this.query.addEventListener(this.query.events.INITIALIZED, this._init)
+    try {
+      this._init()
+    } catch (error) {
+      this.query.addEventListener(this.query.events.INITIALIZED, this._init)
+    }
   }
 
   _init() {
