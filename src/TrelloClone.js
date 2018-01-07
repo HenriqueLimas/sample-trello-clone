@@ -29,7 +29,6 @@ class TrelloClone extends ShadowElement {
 
       <tc-router>
         <tc-route path="/" element="tc-boards"></tc-route>
-        <tc-route path="/:id" element="tc-header"></tc-route>
       </tc/router>
 
       <trello-query></trello-query>
