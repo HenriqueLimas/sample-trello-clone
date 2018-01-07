@@ -1,26 +1,15 @@
 import ShadowElement from './ShadowElement'
+import withQuery from './withQuery'
 
 class Boards extends ShadowElement {
   constructor() {
     super()
-
-    this.$ = {
-      db: null
-    }
 
     this.boards = []
 
     this._init = this._init.bind(this)
     this.render = this.render.bind(this)
     this.updateBoards = this.updateBoards.bind(this)
-  }
-
-  get query() {
-    if (!this.$.db) {
-      this.$.db = document.querySelector('trello-clone').db
-    }
-
-    return this.$.db
   }
 
   connectedCallback() {
@@ -81,4 +70,4 @@ class Boards extends ShadowElement {
   }
 }
 
-window.customElements.define('tc-boards', Boards)
+window.customElements.define('tc-boards', withQuery(Boards))

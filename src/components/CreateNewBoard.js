@@ -1,4 +1,5 @@
 import ShadowElement from './ShadowElement'
+import withQuery from './withQuery'
 
 class CreateNewBoard extends ShadowElement {
   constructor() {
@@ -17,14 +18,6 @@ class CreateNewBoard extends ShadowElement {
     this.render = this.render.bind(this)
     this.handleForm = this.handleForm.bind(this)
     this.toggleIsAdding = this.toggleIsAdding.bind(this)
-  }
-
-  get query() {
-    if (!this.$.db) {
-      this.$.db = document.querySelector('trello-clone').db
-    }
-
-    return this.$.db
   }
 
   connectedCallback() {
@@ -90,4 +83,4 @@ class CreateNewBoard extends ShadowElement {
 
 }
 
-window.customElements.define('tc-create-new-board', CreateNewBoard)
+window.customElements.define('tc-create-new-board', withQuery(CreateNewBoard))
