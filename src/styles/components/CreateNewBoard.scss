@@ -1,10 +1,13 @@
+@import '../variables';
 @import '../mixins/reboot';
 @import '../mixins/cards';
 @import '../mixins/forms';
-@import '../variables';
+@import "../mixins/fonts";
 
 @include reboot() {
   :host {
+    @include font-styles;
+
     width: 100%;
     font-size: $font-size-sm;
   }

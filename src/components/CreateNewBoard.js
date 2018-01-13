@@ -3,7 +3,7 @@ import withQuery from './withQuery'
 
 class CreateNewBoard extends ShadowElement {
   constructor() {
-    super()
+    super('#tc-create-new-board')
 
     this.$ = {
       text: null,
@@ -13,26 +13,41 @@ class CreateNewBoard extends ShadowElement {
       cancel: null
     }
 
-    this.isAdding = false
-
-    this.render = this.render.bind(this)
     this.handleForm = this.handleForm.bind(this)
     this.toggleIsAdding = this.toggleIsAdding.bind(this)
   }
 
+  static get observedAttributes() { return ['adding'] }
+
   connectedCallback() {
-    this.render()
+    this.addEventListener('load', () => {
+      this.$.text = this.shadowRoot.querySelector('.js-create-new-board')
+      this.$.form = this.shadowRoot.querySelector('form')
+      this.$.input = this.shadowRoot.querySelector('input')
+      this.$.cancel = this.shadowRoot.querySelector('.js-cancel')
+      this.$.add = this.shadowRoot.querySelector('.js-add')
 
-    this.$.text = this.shadowRoot.querySelector('.js-create-new-board')
-    this.$.form = this.shadowRoot.querySelector('form')
-    this.$.input = this.shadowRoot.querySelector('input')
-    this.$.cancel = this.shadowRoot.querySelector('.js-cancel')
-    this.$.add = this.shadowRoot.querySelector('.js-add')
+      this.$.form.addEventListener('submit', this.handleForm)
+      this.$.add.addEventListener('click', this.handleForm)
+      this.$.text.addEventListener('click', this.toggleIsAdding)
+      this.$.cancel.addEventListener('click', this.toggleIsAdding)
+    })
+  }
 
-    this.$.form.addEventListener('submit', this.handleForm)
-    this.$.add.addEventListener('click', this.handleForm)
-    this.$.text.addEventListener('click', this.toggleIsAdding)
-    this.$.cancel.addEventListener('click', this.toggleIsAdding)
+  attributeChangedCallback() {
+    this.update()
+  }
+
+  get adding() {
+    return this.hasAttribute('adding')
+  }
+
+  set adding(value) {
+    if (value) {
+      this.setAttribute('adding', '')
+    } else {
+      this.removeAttribute('adding')
+    }
   }
 
   handleForm(event) {
@@ -44,43 +59,29 @@ class CreateNewBoard extends ShadowElement {
 
     this.query.addBoard({ name })
       .then(() => {
-        this.$.form.reset()
-        this.isAdding = false
-
-        this.render()
+        this.adding = false
       })
   }
 
   toggleIsAdding(event) {
     event.preventDefault()
+    event.stopPropagation()
 
-    this.isAdding = !this.isAdding
+    this.adding = !this.adding
+  }
 
-    this.render()
+  update() {
+    if (this.adding) {
+      this.$.form.classList.add('visible')
+      this.$.text.classList.remove('visible')
 
-    if (this.isAdding) {
       this.$.input.focus()
+    } else {
+      this.$.form.classList.remove('visible')
+      this.$.text.classList.add('visible')
+      this.$.form.reset()
     }
   }
-
-  render() {
-    this.update(`
-      <link rel="stylesheet" href="/styles/components/CreateNewBoard.css">
-
-      <div class="board">
-        <form class="${this.isAdding ? 'visible' : ''}">
-          <input name="name" type="text" />
-          <div class="form-actions">
-            <a class="add js-add" href="#">Add</a>
-            <a class="cancel js-cancel" href="#">Cancel</a>
-          </div>
-        </form>
-
-        <a class="create-new-board js-create-new-board ${this.isAdding ? '' : 'visible'}" href="#">Create new board...</a>
-      </div>
-    `)
-  }
-
 }
 
 window.customElements.define('tc-create-new-board', withQuery(CreateNewBoard))

@@ -13,7 +13,8 @@ let cache
 
 const entries = [
   'src/main.js',
-  'src/components/Header.js'
+  'src/components/Header.js',
+  'src/components/CreateNewBoard.js'
 ]
 
 entries.forEach(entry =>

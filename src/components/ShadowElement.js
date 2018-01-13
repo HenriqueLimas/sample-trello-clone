@@ -23,6 +23,8 @@ class ShadowElement extends HTMLElement {
 
         const clone = document.importNode(this.template.content, true)
         this.shadowRoot.appendChild(clone)
+
+        this.dispatchEvent(new CustomEvent('load'))
       })
   }
 
@@ -37,6 +39,8 @@ class ShadowElement extends HTMLElement {
   loadStyle() {
     return new Promise((resolve, reject) => {
       const style = this.template.content.querySelector('style[from]')
+
+      if (!style) return resolve()
 
       const src = style.getAttribute('from')
 
