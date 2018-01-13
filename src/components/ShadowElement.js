@@ -6,6 +6,8 @@ class ShadowElement extends HTMLElement {
   constructor(templateQuery) {
     super()
 
+    this.$ = {}
+
     this.templateQuery = templateQuery
 
     this.attachShadow({ mode: 'open' })
@@ -34,6 +36,14 @@ class ShadowElement extends HTMLElement {
     }
 
     return this._template
+  }
+
+  create(node, deep) {
+    if (!this.$[node]) {
+      this.$[node] = document.createElement(node)
+    }
+
+    return this.$[node].cloneNode(deep)
   }
 
   loadStyle() {

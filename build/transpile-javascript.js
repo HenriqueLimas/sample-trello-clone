@@ -14,6 +14,7 @@ let cache
 const entries = [
   'src/main.js',
   'src/components/Header.js',
+  'src/components/Boards.js',
   'src/components/CreateNewBoard.js'
 ]
 

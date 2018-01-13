@@ -3,34 +3,64 @@ import withQuery from './withQuery'
 
 class Boards extends ShadowElement {
   constructor() {
-    super()
+    super('#tc-boards')
 
-    this.boards = []
+    this.$ = {
+      list: null,
+      createItem: null
+    }
+
+    this.boards = new Set()
 
     this._init = this._init.bind(this)
-    this.render = this.render.bind(this)
+    this.update = this.update.bind(this)
+    this.createItem = this.createItem.bind(this)
     this.updateBoards = this.updateBoards.bind(this)
   }
 
   connectedCallback() {
-    try {
-      this._init()
-    } catch (error) {
-      this.query.addEventListener(this.query.events.INITIALIZED, this._init)
-    }
+    this.addEventListener('load', () => {
+      try {
+        this._init()
+      } catch (error) {
+        this.query.addEventListener(this.query.events.INITIALIZED, this._init)
+      }
+    })
   }
 
   _init() {
+    this.$.list = this.shadowRoot.querySelector('.js-list')
+    this.$.createItem = this.shadowRoot.querySelector('.js-create-item')
+
     this.query.observeBoards(this.updateBoards)
 
     this.query.fetchBoards()
-      .then(results => {
-        this.boards = results
-
-        this.render()
-      })
 
     this.query.removeEventListener(this.query.events.INITIALIZED, this._init)
+  }
+
+  createItem({ id_board, name }) {
+    const exists = this.shadowRoot.querySelector(`.js-board[data-id="${id_board}"]`)
+
+    if (exists) {
+      return exists
+    }
+
+    const item = this.create('li')
+    const board = this.create('div')
+    const text = this.create('span')
+
+    item.setAttribute('data-id', id_board)
+    item.setAttribute('class', 'item js-board col-xs-12 col-md-6 col-lg-3')
+    board.setAttribute('class', 'board')
+    text.setAttribute('class', 'board__name js-board__name')
+
+    text.textContent = name
+
+    board.appendChild(text)
+    item.appendChild(board)
+
+    return item
   }
 
   disconnectedCallback() {
@@ -38,39 +68,27 @@ class Boards extends ShadowElement {
   }
 
   updateBoards(changes) {
-    changes.forEach(change => {
-      this.boards = change.object
-    })
+    const boardsFromDB = changes[0].object
 
-    this.render()
+    this.boardsToAdd = boardsFromDB.reduce((boardsToAdd, board) => {
+      if (!this.boards.has(board.id_board)) {
+        boardsToAdd.push(board)
+      }
+
+      return boardsToAdd
+    }, [])
+
+    this.update()
   }
 
-  render() {
-    this.update(`
-      <link rel="stylesheet" href="/styles/components/Boards.css">
+  update() {
+    this.boardsToAdd.forEach(board => {
+      const item = this.createItem(board)
+      this.$.list.insertBefore(item, this.$.createItem)
+      this.boards.add(board.id_board)
+    })
 
-      <section class="boards container">
-        <h1>Boards</h1>
-
-        <main>
-          <ul class="list row">
-            ${this.boards.map(board => `
-              <li class="item col-xs-12 col-md-6 col-lg-3">
-                <div class="board">
-                  <span class="board__name js-board__name">
-                    ${board.name}
-                  </span>
-                </div>
-              </li>
-            `).join('')}
-
-            <li class="item col-xs-12 col-md-6 col-lg-3">
-              <tc-create-new-board></tc-create-new-board>
-            </li>
-          </ul>
-        </main>
-      </section>
-    `)
+    this.boardsToAdd = []
   }
 }
 
