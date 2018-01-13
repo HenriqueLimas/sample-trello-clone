@@ -6,10 +6,11 @@
   "scripts": {
     "clean": "rm -rf dist",
     "cp-html": "cp index.html dist",
-    "cp-polyfills": "cp -R src/polyfills dist/src/polyfills",
+    "cp-templates": "cp -R src/templates dist/src",
+    "cp-polyfills": "cp -R src/polyfills dist/src",
     "build-js": "node build/transpile-javascript.js",
     "build-css": "node build/transpile-styles.js",
-    "build": "npm run build-js && npm run build-css && npm run cp-html && npm run cp-polyfills",
+    "build": "npm run build-js && npm run build-css && npm run cp-html && npm run cp-templates && npm run cp-polyfills",
     "watch": "npm-watch",
     "dev": "npm run clean && npm run build && parallelshell \"npm run watch\" \"npm run serve\"",
     "serve": "nodemon -e js server/index.js",
@@ -28,7 +29,13 @@
       ],
       "extensions": "scss"
     },
-    "cp-html": "index.html"
+    "cp-html": "index.html",
+    "cp-templates": {
+      "patterns": [
+        "src"
+      ],
+      "extensions": "html"
+    }
   },
   "devDependencies": {
     "babel-plugin-external-helpers": "^6.22.0",

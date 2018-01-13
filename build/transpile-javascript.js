@@ -12,7 +12,8 @@ const sourcemaps = require('rollup-plugin-sourcemaps')
 let cache
 
 const entries = [
-  'src/main.js'
+  'src/main.js',
+  'src/components/Header.js'
 ]
 
 entries.forEach(entry =>
