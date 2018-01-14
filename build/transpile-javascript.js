@@ -15,6 +15,7 @@ const entries = [
   'src/main.js',
   'src/components/Header.js',
   'src/components/Boards.js',
+  'src/components/TrelloRouter.js',
   'src/components/CreateNewBoard.js'
 ]
 
