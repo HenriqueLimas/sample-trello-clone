@@ -1,0 +1,16 @@
+<link rel="import" href="/src/templates/tc-router.html">
+<link rel="import" href="/src/templates/tc-query.html">
+<link rel="import" href="/src/templates/tc-header.html">
+<link rel="import" href="/src/templates/tc-boards.html">
+
+<template id="trello-clone">
+  <tc-header></tc-header>
+
+  <tc-router>
+    <tc-route path="/" element="tc-boards"></tc-route>
+  </tc-router>
+
+  <trello-query></trello-query>
+</template>
+
+<script src="/src/TrelloClone.js"></script>
