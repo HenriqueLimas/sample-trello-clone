@@ -255,5 +255,52 @@ function mapParamsToProps(routePath, url, element) {
     })
 }
 
+class TrelloLink extends HTMLElement {
+  constructor() {
+    super()
+
+    this.$ = {
+      link: null
+    }
+  }
+
+  get to() {
+    return this.getAttribute('to')
+  }
+
+  get router() {
+    if (!this._router) {
+      this._router = document
+        .querySelector('trello-clone')
+        .shadowRoot
+        .querySelector('tc-router')
+    }
+
+    return this._router
+  }
+
+  connectedCallback() {
+    if (!this.getAttribute('to')) {
+      throw new Error('tc-link: "to" attribute is required')
+    }
+
+    this.$.link = document.createElement('a')
+
+    this.$.link.setAttribute('href', this.to)
+    this.$.link.setAttribute('alt', this.getAttribute('alt'))
+    this.$.link.setAttribute('class', this.getAttribute('class'))
+    this.$.link.innerHTML = this.innerHTML
+
+    this.$.link.addEventListener('click', event => {
+      event.preventDefault()
+      this.router.go(this.to)
+    })
+
+    this.innerHTML = ''
+    this.appendChild(this.$.link)
+  }
+}
+
 window.customElements.define('tc-router', TrelloRouter)
 window.customElements.define('tc-route', class TrelloRoute extends HTMLElement {})
+window.customElements.define('tc-link', TrelloLink, { extends: 'a' })
