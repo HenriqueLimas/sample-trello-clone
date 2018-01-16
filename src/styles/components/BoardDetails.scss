@@ -1,0 +1,13 @@
+@import '../mixins/reboot';
+@import '../variables';
+
+@include reboot() {
+  :host {
+    font-family: $font-family;
+    font-size: $font-size;
+  }
+
+  .title {
+    text-align: center;
+  }
+}

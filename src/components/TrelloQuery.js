@@ -63,6 +63,15 @@ class TrelloQuery extends HTMLElement {
     })
   }
 
+  fetchBoard(id_board) {
+    return this.boards
+      .getBoard(id_board)
+      .exec()
+      .then(results => {
+        return results[0]
+      })
+  }
+
   addBoard({ name }) {
     return this.boards.add({ name })
   }

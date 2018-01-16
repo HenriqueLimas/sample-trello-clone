@@ -47,18 +47,21 @@ class Boards extends ShadowElement {
     }
 
     const item = this.create('li')
+    const anchor = this.create('tc-link')
     const board = this.create('div')
     const text = this.create('span')
 
     item.setAttribute('data-id', id_board)
     item.setAttribute('class', 'item js-board col-xs-12 col-md-6 col-lg-3')
+    anchor.setAttribute('to', `/${id_board}`)
     board.setAttribute('class', 'board')
     text.setAttribute('class', 'board__name js-board__name')
 
     text.textContent = name
 
     board.appendChild(text)
-    item.appendChild(board)
+    anchor.appendChild(board)
+    item.appendChild(anchor)
 
     return item
   }

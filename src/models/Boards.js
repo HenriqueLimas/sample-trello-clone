@@ -21,4 +21,9 @@ export default class Boards extends Base {
 
     return this.db.insertOrReplace().into(this.table).values([row]).exec();
   }
+
+  getBoard(id_board) {
+    return this.db.select().from(this.table)
+      .where(this.table.id_board.eq(id_board))
+  }
 }

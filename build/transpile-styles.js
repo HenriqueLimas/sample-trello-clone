@@ -13,6 +13,7 @@ const appShellEntries = [
 const components = [
   'components/Header',
   'components/Boards',
+  'components/BoardDetails',
   'components/CreateNewBoard'
 ]
 

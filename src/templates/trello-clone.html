@@ -2,12 +2,14 @@
 <link rel="import" href="/src/templates/tc-query.html">
 <link rel="import" href="/src/templates/tc-header.html">
 <link rel="import" href="/src/templates/tc-boards.html">
+<link rel="import" href="/src/templates/tc-board-details.html">
 
 <template id="trello-clone">
   <tc-header></tc-header>
 
   <tc-router>
     <tc-route path="/" element="tc-boards"></tc-route>
+    <tc-route path="/:id" element="tc-board-details"></tc-route>
   </tc-router>
 
   <trello-query></trello-query>

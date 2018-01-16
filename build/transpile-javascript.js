@@ -15,6 +15,7 @@ const entries = [
   'src/TrelloClone.js',
   'src/components/Header.js',
   'src/components/Boards.js',
+  'src/components/BoardDetails.js',
   'src/components/TrelloQuery.js',
   'src/components/TrelloRouter.js',
   'src/components/CreateNewBoard.js'
