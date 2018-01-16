@@ -46,28 +46,8 @@ class TrelloRouter extends HTMLElement {
     this.utils.stateChange(this.router)
   }
 
-  go(path, options={}) {
-    const currentState = window.history.state
-
-    if (options.replace) {
-      window.history.replaceState(currentState, null, path)
-    } else {
-      window.history.pushState(currentState, null, path)
-    }
-
-    try {
-      const popstateEvent = new PopStateEvent('popstate', {
-        bubbles: false,
-        cancelable: false,
-        state: currentState
-      })
-
-      window.dispatchEvent(popstateEvent)
-    } catch (error) {
-      const fallbackEvent = document.createEvent('CustomEvent')
-      fallbackEvent.initCustomEvent('popstate', false, false, { state: currentState })
-      window.dispatchEvent(fallbackEvent)
-    }
+  go(path, options) {
+    go(path, options)
   }
 
   stateChangeHandler() {
@@ -255,6 +235,30 @@ function mapParamsToProps(routePath, url, element) {
     })
 }
 
+function go(path, options={}) {
+  const currentState = window.history.state
+
+  if (options.replace) {
+    window.history.replaceState(currentState, null, path)
+  } else {
+    window.history.pushState(currentState, null, path)
+  }
+
+  try {
+    const popstateEvent = new PopStateEvent('popstate', {
+      bubbles: false,
+      cancelable: false,
+      state: currentState
+    })
+
+    window.dispatchEvent(popstateEvent)
+  } catch (error) {
+    const fallbackEvent = document.createEvent('CustomEvent')
+    fallbackEvent.initCustomEvent('popstate', false, false, { state: currentState })
+    window.dispatchEvent(fallbackEvent)
+  }
+}
+
 class TrelloLink extends HTMLElement {
   constructor() {
     super()
@@ -266,17 +270,6 @@ class TrelloLink extends HTMLElement {
 
   get to() {
     return this.getAttribute('to')
-  }
-
-  get router() {
-    if (!this._router) {
-      this._router = document
-        .querySelector('trello-clone')
-        .shadowRoot
-        .querySelector('tc-router')
-    }
-
-    return this._router
   }
 
   connectedCallback() {
@@ -293,7 +286,7 @@ class TrelloLink extends HTMLElement {
 
     this.$.link.addEventListener('click', event => {
       event.preventDefault()
-      this.router.go(this.to)
+      go(this.to)
     })
 
     this.innerHTML = ''
