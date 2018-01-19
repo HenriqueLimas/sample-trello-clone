@@ -2,6 +2,7 @@ import lf from 'lovefield'
 import initializeSchema from '../db/schema'
 
 import BoardModel from '../models/Boards'
+import ListModel from '../models/Lists'
 
 class TrelloQuery extends HTMLElement {
   constructor() {
@@ -24,6 +25,7 @@ class TrelloQuery extends HTMLElement {
       initializeSchema(lf).connect()
         .then(database => {
           this.boards = new BoardModel(database)
+          this.lists = new ListModel(database)
 
           this.db = database
           this.initialized = true
@@ -74,6 +76,10 @@ class TrelloQuery extends HTMLElement {
 
   addBoard({ name }) {
     return this.boards.add({ name })
+  }
+
+  addList({ id_board, name }) {
+    return this.lists.add({ id_board, name })
   }
 }
 
