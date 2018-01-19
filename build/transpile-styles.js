@@ -13,8 +13,10 @@ const appShellEntries = [
 const components = [
   'components/Header',
   'components/Boards',
+  'components/Lists',
   'components/BoardDetails',
-  'components/CreateNewBoard'
+  'components/CreateNewBoard',
+  'components/CreateNewList'
 ]
 
 const processCss = entry =>

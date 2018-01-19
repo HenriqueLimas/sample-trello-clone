@@ -1,0 +1,60 @@
+@import '../variables';
+@import '../mixins/reboot';
+@import '../mixins/cards';
+@import '../mixins/forms';
+@import "../mixins/fonts";
+
+@include reboot() {
+  :host {
+    @include font-styles;
+
+    width: 100%;
+    color: $primary;
+    font-size: $font-size-sm;
+  }
+
+  a:visited {
+    color: $primary;
+  }
+
+  form, .create-new-list {
+    display: none;
+  }
+
+  .visible {
+    display: block;
+  }
+
+  .list {
+    @include card-board($secondary);
+
+    color: $black;
+    text-align: center;
+    height: 65px;
+    width: inherit;
+  }
+
+  :host([adding]) {
+    color: $black;
+
+    .list {
+      background-color: $gray;
+    }
+
+    a:visited {
+      color: $black;
+    }
+  }
+
+  input {
+    @include input;
+  }
+
+  .form-actions {
+    margin-top: 10px;
+  }
+
+  .add {
+    margin-right: 3px;
+  }
+}

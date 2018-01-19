@@ -6,7 +6,9 @@ class BoardDetails extends ShadowElement {
     super('#tc-board-details')
 
     this.$ = {
-      title: null
+      title: null,
+      container: null,
+      lists: null
     }
 
     this.board = null
@@ -17,8 +19,6 @@ class BoardDetails extends ShadowElement {
   get boardId() {
     return this.getAttribute('id')
   }
-
-  static get observedAttributes() { return ['id'] }
 
   connectedCallback() {
     this.addEventListener('load', () => {
@@ -32,12 +32,16 @@ class BoardDetails extends ShadowElement {
 
   init() {
     this.$.title = this.shadowRoot.querySelector('.js-title')
+    this.$.container = this.shadowRoot.querySelector('.js-container')
+    this.$.lists = this.create('tc-lists')
+    this.$.lists.boardId = this.boardId
 
     this.query.fetchBoard(this.boardId)
       .then(board => {
         this.board = board
 
         this.$.title.textContent = board.name
+        this.$.container.appendChild(this.$.lists)
       })
   }
 }
