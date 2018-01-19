@@ -16,6 +16,11 @@
     margin: auto;
   }
 
+  a, a:visited {
+    text-decoration: none;
+    $color: $white;
+  }
+
   .board {
     @include card-board();
   }

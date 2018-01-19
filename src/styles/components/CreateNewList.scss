@@ -13,7 +13,8 @@
     font-size: $font-size-sm;
   }
 
-  a:visited {
+  a, a:visited {
+    text-decoration: none;
     color: $primary;
   }
 
@@ -41,7 +42,7 @@
       background-color: $gray;
     }
 
-    a:visited {
+    a, a:visited {
       color: $black;
     }
   }

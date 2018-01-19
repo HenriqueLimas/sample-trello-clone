@@ -12,7 +12,8 @@
     font-size: $font-size-sm;
   }
 
-  a:visited {
+  a, a:visited {
+    text-decoration: none;
     color: $black;
   }
 
