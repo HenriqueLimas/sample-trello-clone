@@ -24,10 +24,14 @@ class Lists extends ShadowElement {
   }
 
   connectedCallback() {
-    try {
-      this.init()
-    } catch (error) {
-      this.query.addEventListener(this.query.events.INITIALIZED, this.init)
+    if (!this.loaded) {
+      this.addEventListener('load', this.init)
+    } else {
+      try {
+        this.init()
+      } catch (error) {
+        this.query.addEventListener(this.query.events.INITIALIZED, this.init)
+      }
     }
   }
 
@@ -39,4 +43,4 @@ class Lists extends ShadowElement {
   }
 }
 
-window.customElements.define('tc-lists', Lists)
+window.customElements.define('tc-lists', withQuery(Lists))

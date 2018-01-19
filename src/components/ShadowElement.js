@@ -26,6 +26,7 @@ class ShadowElement extends HTMLElement {
         const clone = document.importNode(this.template.content, true)
         this.shadowRoot.appendChild(clone)
 
+        this.loaded = true
         this.dispatchEvent(new CustomEvent('load'))
       })
   }

@@ -13,6 +13,7 @@ class CreateNewList extends ShadowElement {
       cancel: null
     }
 
+    this.init = this.init.bind(this)
     this.handleForm = this.handleForm.bind(this)
     this.toggleIsAdding = this.toggleIsAdding.bind(this)
   }
@@ -20,6 +21,14 @@ class CreateNewList extends ShadowElement {
   static get observedAttributes() { return ['adding'] }
 
   connectedCallback() {
+    if (!this.loaded) {
+      this.addEventListener('load', this.init)
+    } else {
+      this.init()
+    }
+  }
+
+  init() {
     this.$.text = this.shadowRoot.querySelector('.js-create-new-list')
     this.$.form = this.shadowRoot.querySelector('form')
     this.$.input = this.shadowRoot.querySelector('input')
