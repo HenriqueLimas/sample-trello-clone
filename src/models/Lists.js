@@ -9,8 +9,10 @@ export default class Lists extends Base {
     this.tableName = tables.LISTS
   }
 
-  getAll() {
-    return this.db.select().from(this.table)
+  getAll(id_board) {
+    return this.db.select()
+      .from(this.table)
+      .where(this.table.id_board.eq(id_board))
   }
 
   add({ id_board, name }) {

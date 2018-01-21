@@ -31,6 +31,14 @@ class ShadowElement extends HTMLElement {
       })
   }
 
+  runOnLoad(callback) {
+    if (!this.loaded) {
+      this.addEventListener('load', callback)
+    } else {
+      callback.call(this)
+    }
+  }
+
   get template() {
     if (!this._template) {
       this._template = ownerDocument.querySelector(this.templateQuery)

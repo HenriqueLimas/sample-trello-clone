@@ -19,7 +19,7 @@ class Boards extends ShadowElement {
   }
 
   connectedCallback() {
-    this.addEventListener('load', () => {
+    this.runOnLoad(() => {
       try {
         this._init()
       } catch (error) {

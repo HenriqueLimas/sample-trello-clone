@@ -41,12 +41,16 @@ class TrelloQuery extends HTMLElement {
     this.dispatchEvent(event)
   }
 
-  getBoardsQuery() {
-    if (!this.queries.boards) {
-      this.queries.boards = this.boards.getAll()
+  getQuery(model) {
+    if (!this.queries[model]) {
+      this.queries[model] = this[model].getAll()
     }
 
-    return this.queries.boards
+    return this.queries[model]
+  }
+
+  getBoardsQuery() {
+    return this.getQuery('boards')
   }
 
   observeBoards(callback) {
@@ -76,6 +80,28 @@ class TrelloQuery extends HTMLElement {
 
   addBoard({ name }) {
     return this.boards.add({ name })
+  }
+
+  getListsQuery(id_board) {
+    return this.lists.getAll(id_board)
+  }
+
+  observe(query, callback) {
+    return this.db.observe(query, callback)
+  }
+
+  unobserve(query, callback) {
+    return this.db.unobserve(query, callback)
+  }
+
+  fetchLists(id_board) {
+    return this.lists
+      .getListsQuery(id_board)
+      .exec()
+      .then(results => {
+        this.results.lists = results
+        return results
+      })
   }
 
   addList({ id_board, name }) {

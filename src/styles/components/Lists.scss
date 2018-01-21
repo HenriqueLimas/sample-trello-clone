@@ -1,23 +1,37 @@
 @import '../mixins/reboot';
-@import '../mixins/list';
-@import '../mixins/cards';
+@import "../mixins/fonts";
 @import '../variables';
-@import '../grid';
 
 @include reboot() {
   $list-item-width: 270px;
   $list-item-margin: 5px;
 
   :host {
-    display: block;
-    font-family: $font-family;
-    font-size: $font-size;
+    @include font-styles;
 
-    margin-top: $main-padding;
+    display: block;
+
+    height: 95%;
+  }
+
+  .list-container {
+    height: 100%;
+  }
+
+  .list {
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 100%;
   }
 
   .list-item {
+    display: inline-block;
+
+    height: 100%;
     width: $list-item-width;
     margin-right: $list-item-margin;
+
+    vertical-align: top;
   }
 }

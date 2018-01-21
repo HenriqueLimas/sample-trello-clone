@@ -1,0 +1,28 @@
+@import '../mixins/reboot';
+@import '../mixins/list';
+@import '../mixins/cards';
+@import "../mixins/fonts";
+@import '../variables';
+
+@include reboot() {
+  :host {
+    @include font-styles;
+
+    display: block;
+    width: 100%;
+  }
+
+  .list {
+    @include card-board($gray);
+
+    color: $black;
+    text-align: center;
+    height: 65px;
+    width: inherit;
+  }
+
+  .list-name {
+    margin: 0;
+    text-align: left;
+  }
+}
