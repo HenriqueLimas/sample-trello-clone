@@ -13,7 +13,7 @@
     "build": "npm run build-js && npm run build-css && npm run build-components && npm run cp-html && npm run cp-polyfills",
     "watch": "npm-watch",
     "dev": "npm run clean && npm run build && parallelshell \"npm run watch\" \"npm run serve\"",
-    "deploy": "npm run clean && npm run build",
+    "deploy": "npm run clean && npm run build && firebase deploy",
     "serve": "nodemon -e js server/index.js",
     "start": "node server/index.js"
   },
@@ -44,6 +44,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-es2015-rollup": "^3.0.0",
     "copy": "^0.3.0",
+    "firebase": "^4.9.0",
     "html-minifier": "^3.5.8",
     "mkdirp": "^0.5.1",
     "node-sass": "^4.7.2",
