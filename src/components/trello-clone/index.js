@@ -1,4 +1,4 @@
-import ShadowElement from './components/ShadowElement'
+import ShadowElement from '../ShadowElement'
 
 class TrelloClone extends ShadowElement {
   constructor() {

@@ -6,14 +6,14 @@
   "scripts": {
     "clean": "rm -rf dist",
     "cp-html": "cp index.html dist",
-    "cp-templates": "cp -R src/templates dist/src",
     "cp-polyfills": "cp -R src/polyfills dist/src",
     "build-js": "node build/transpile-javascript.js",
     "build-css": "node build/transpile-styles.js",
     "build-components": "node build/build-components.js",
-    "build": "npm run build-js && npm run build-css && npm run build-components && npm run cp-html && npm run cp-templates && npm run cp-polyfills",
+    "build": "npm run build-js && npm run build-css && npm run build-components && npm run cp-html && npm run cp-polyfills",
     "watch": "npm-watch",
     "dev": "npm run clean && npm run build && parallelshell \"npm run watch\" \"npm run serve\"",
+    "deploy": "npm run clean && npm run build",
     "serve": "nodemon -e js server/index.js",
     "start": "node server/index.js"
   },
@@ -36,13 +36,7 @@
       ],
       "extensions": "html,js,scss"
     },
-    "cp-html": "index.html",
-    "cp-templates": {
-      "patterns": [
-        "src"
-      ],
-      "extensions": "html"
-    }
+    "cp-html": "index.html"
   },
   "devDependencies": {
     "babel-plugin-external-helpers": "^6.22.0",
@@ -50,6 +44,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-es2015-rollup": "^3.0.0",
     "copy": "^0.3.0",
+    "html-minifier": "^3.5.8",
     "mkdirp": "^0.5.1",
     "node-sass": "^4.7.2",
     "npm-watch": "^0.1.9",
@@ -58,7 +53,8 @@
     "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-commonjs": "^8.2.0",
     "rollup-plugin-node-resolve": "^3.0.0",
-    "rollup-plugin-sourcemaps": "^0.4.2"
+    "rollup-plugin-sourcemaps": "^0.4.2",
+    "rollup-plugin-uglify": "^3.0.0"
   },
   "author": "",
   "license": "ISC",

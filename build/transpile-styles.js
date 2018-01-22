@@ -43,17 +43,3 @@ mkdirp(DIST_PATH, err => {
     .then(() => console.log('App shell generated with success!'))
     .catch(console.error)
 })
-
-mkdirp(DIST_PATH + '/components', err => {
-  if (err) return console.error(err)
-
-  Promise.all(
-    components
-      .map(entry =>
-        processCss(entry)
-        .then(result => writeFile(entry)([result]))
-        .catch(err => console.error(`Error on ${entry}: `, err))
-      )
-  )
-  .then(() => console.log('Styles generated with success!'))
-})

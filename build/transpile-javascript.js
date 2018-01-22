@@ -1,41 +1,41 @@
-const intro = `/**
-  * Built: ${new Date()}
-  */
-`
-
 const rollup = require('rollup')
 const babel = require('rollup-plugin-babel')
 const commonjs = require('rollup-plugin-commonjs')
 const resolve = require('rollup-plugin-node-resolve')
-const sourcemaps = require('rollup-plugin-sourcemaps')
+const uglify = require('rollup-plugin-uglify')
+
+const intro =
+`/**
+ * Built: ${new Date()}
+ */
+`
 
 let cache
 
-const entries = [
-  'src/TrelloClone.js',
-  'src/components/TrelloQuery.js',
-  'src/components/TrelloRouter.js'
-]
+module.exports = entry => {
+  const plugins = [
+    resolve({ jsnext: true }),
+    commonjs(),
+    babel()
+  ]
 
-entries.forEach(entry =>
-  rollup.rollup({
+  if (process.env.NODE_ENV === 'production') {
+    plugins.push(uglify())
+  }
+
+  return rollup.rollup({
     entry,
     cache,
-    plugins: [
-      sourcemaps(),
-      resolve({ jsnext: true }),
-      commonjs(),
-      babel()
-    ]
+    plugins
   }).then(bundle => {
     cache = bundle
-    bundle.write({
+
+    const { code } = bundle.generate({
       intro,
-      format: 'iife',
-      dest: `dist/${entry}`,
-      sourceMap: process.env !== 'production',
-      sourceMapFile: `dist/${entry}`
+      format: 'iife'
     })
+
+    return { code }
   })
   .catch(console.error)
-)
+}

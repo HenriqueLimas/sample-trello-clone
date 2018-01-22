@@ -1,8 +1,8 @@
 import lf from 'lovefield'
-import initializeSchema from '../db/schema'
+import initializeSchema from '../../db/schema'
 
-import BoardModel from '../models/Boards'
-import ListModel from '../models/Lists'
+import BoardModel from '../../models/Boards'
+import ListModel from '../../models/Lists'
 
 class TrelloQuery extends HTMLElement {
   constructor() {

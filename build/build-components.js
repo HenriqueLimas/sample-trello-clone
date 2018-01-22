@@ -1,16 +1,18 @@
 const fs = require('fs')
 const mkdirp = require('mkdirp')
+const minify = require('html-minifier').minify
 
-const rollup = require('rollup')
-const babel = require('rollup-plugin-babel')
-const commonjs = require('rollup-plugin-commonjs')
-const resolve = require('rollup-plugin-node-resolve')
 const sass = require('node-sass')
+const buildJs = require('./transpile-javascript')
 
 const DIST_PATH = 'dist/src/components'
 const BASE_PATH = 'src/components/'
+const isProduction = process.env.NODE_ENV === 'production'
+
+const STYLE_REGEXP = /<style inject><\/style>/
 
 const entries = [
+  'trello-clone',
   'tc-header',
   'tc-boards',
   'tc-board-details',
@@ -18,40 +20,16 @@ const entries = [
   'tc-create-new-list',
   'tc-list',
   'tc-lists',
+  'tc-query',
+  'tc-router',
 ]
 
-const buildJs = entry => {
-  const intro =
-`/**
- * Built: ${new Date()}
- */
-`
-
-  let cache
-
-  return rollup.rollup({
-    entry: BASE_PATH + entry + '/index.js',
-    cache,
-    plugins: [
-      resolve({ jsnext: true }),
-      commonjs(),
-      babel()
-    ]
-  }).then(bundle => {
-    cache = bundle
-
-    const { code } = bundle.generate({
-      intro,
-      format: 'iife'
-    })
-
-    return { code }
-  })
-  .catch(console.error)
-}
-
-const buildStyles = (entry) => {
+const buildStyles = (entry, template) => {
   return new Promise((resolve, reject) => {
+    if (!template.match(STYLE_REGEXP)) {
+      return resolve('')
+    }
+
     sass.render({
       file: BASE_PATH + entry + `/styles.scss`
     }, (err, result) => {
@@ -70,21 +48,32 @@ const readTemplate = entry => {
         return reject(error)
       }
 
+
       resolve(data)
     })
   })
 }
 
 const buildComponent = (entry) => {
-  return Promise.all([
-    readTemplate(entry),
-    buildJs(entry),
-    buildStyles(entry)
-  ])
-    .then(([template, script, styles]) => {
-      return template
-        .replace(/<style inject><\/style>/, `<style>${styles}</style>`)
-        .concat(`<script>${script.code}</script>`)
+  return readTemplate(entry)
+    .then(template => {
+      const process = [
+        buildJs(BASE_PATH + entry + '/index.js'),
+        buildStyles(entry, template)
+      ]
+
+      return Promise.all(process)
+      .then(([script, styles]) => {
+        template = template
+          .replace(STYLE_REGEXP, `<style>${styles}</style>`)
+          .concat(`<script>${script.code}</script>`)
+
+        if (isProduction) {
+          return minify(template)
+        }
+
+        return template
+      })
     })
 }
 
