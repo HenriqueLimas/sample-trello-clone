@@ -12,8 +12,7 @@ const appShellEntries = [
 
 const components = [
   'components/List',
-  'components/Lists',
-  'components/CreateNewList'
+  'components/Lists'
 ]
 
 const processCss = entry =>

@@ -16,8 +16,7 @@ const entries = [
   'src/components/List.js',
   'src/components/Lists.js',
   'src/components/TrelloQuery.js',
-  'src/components/TrelloRouter.js',
-  'src/components/CreateNewList.js'
+  'src/components/TrelloRouter.js'
 ]
 
 entries.forEach(entry =>
