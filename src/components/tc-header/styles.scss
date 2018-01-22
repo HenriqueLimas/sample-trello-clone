@@ -1,6 +1,6 @@
-@import "../variables";
-@import "../mixins/fonts";
-@import "../mixins/content-box";
+@import "../../styles/variables";
+@import "../../styles/mixins/fonts";
+@import "../../styles/mixins/content-box";
 
 :host {
   @include font-styles;

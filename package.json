@@ -10,7 +10,8 @@
     "cp-polyfills": "cp -R src/polyfills dist/src",
     "build-js": "node build/transpile-javascript.js",
     "build-css": "node build/transpile-styles.js",
-    "build": "npm run build-js && npm run build-css && npm run cp-html && npm run cp-templates && npm run cp-polyfills",
+    "build-components": "node build/build-components.js",
+    "build": "npm run build-js && npm run build-css && npm run build-components && npm run cp-html && npm run cp-templates && npm run cp-polyfills",
     "watch": "npm-watch",
     "dev": "npm run clean && npm run build && parallelshell \"npm run watch\" \"npm run serve\"",
     "serve": "nodemon -e js server/index.js",
@@ -28,6 +29,12 @@
         "src"
       ],
       "extensions": "scss"
+    },
+    "build-components": {
+      "patterns": [
+        "src"
+      ],
+      "extensions": "html,js,scss"
     },
     "cp-html": "index.html",
     "cp-templates": {

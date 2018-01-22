@@ -1,4 +1,4 @@
-import ShadowElement from './ShadowElement'
+import ShadowElement from '../ShadowElement'
 
 class Header extends ShadowElement {
   constructor() {
