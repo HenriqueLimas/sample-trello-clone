@@ -16,6 +16,8 @@ const entries = [
   'tc-board-details',
   'tc-create-new-board',
   'tc-create-new-list',
+  'tc-list',
+  'tc-lists',
 ]
 
 const buildJs = entry => {

@@ -1,5 +1,5 @@
-import ShadowElement from './ShadowElement'
-import withQuery from './withQuery'
+import ShadowElement from '../ShadowElement'
+import withQuery from '../withQuery'
 
 class List extends ShadowElement {
   constructor() {

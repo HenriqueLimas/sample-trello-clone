@@ -10,10 +10,7 @@ const appShellEntries = [
   'app-shell'
 ]
 
-const components = [
-  'components/List',
-  'components/Lists'
-]
+const components = []
 
 const processCss = entry =>
   new Promise((resolve, reject) => {
