@@ -11,7 +11,8 @@ const DIST_PATH = 'dist/src/components'
 const BASE_PATH = 'src/components/'
 
 const entries = [
-  'tc-header'
+  'tc-header',
+  'tc-boards'
 ]
 
 const buildJs = entry => {

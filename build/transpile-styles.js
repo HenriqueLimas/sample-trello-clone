@@ -11,7 +11,6 @@ const appShellEntries = [
 ]
 
 const components = [
-  'components/Boards',
   'components/List',
   'components/Lists',
   'components/BoardDetails',
