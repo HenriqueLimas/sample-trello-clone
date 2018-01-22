@@ -1,5 +1,3 @@
-import { innerHTML } from '../utils/diffhtml'
-
 const ownerDocument = document.currentScript.ownerDocument
 
 class ShadowElement extends HTMLElement {
@@ -76,10 +74,6 @@ class ShadowElement extends HTMLElement {
 
       req.send()
     })
-  }
-
-  update(html) {
-    innerHTML(this.shadowRoot, html)
   }
 }
 
