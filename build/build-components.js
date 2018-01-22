@@ -12,7 +12,8 @@ const BASE_PATH = 'src/components/'
 
 const entries = [
   'tc-header',
-  'tc-boards'
+  'tc-boards',
+  'tc-board-details',
 ]
 
 const buildJs = entry => {

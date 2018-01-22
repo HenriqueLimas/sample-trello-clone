@@ -13,7 +13,6 @@ let cache
 
 const entries = [
   'src/TrelloClone.js',
-  'src/components/BoardDetails.js',
   'src/components/List.js',
   'src/components/Lists.js',
   'src/components/TrelloQuery.js',
