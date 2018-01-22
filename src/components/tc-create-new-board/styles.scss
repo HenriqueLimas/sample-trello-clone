@@ -1,8 +1,8 @@
-@import '../variables';
-@import '../mixins/reboot';
-@import '../mixins/cards';
-@import '../mixins/forms';
-@import "../mixins/fonts";
+@import '../../styles/variables';
+@import '../../styles/mixins/reboot';
+@import '../../styles/mixins/cards';
+@import '../../styles/mixins/forms';
+@import "../../styles/mixins/fonts";
 
 @include reboot() {
   :host {

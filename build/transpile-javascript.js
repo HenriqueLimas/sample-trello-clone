@@ -17,7 +17,6 @@ const entries = [
   'src/components/Lists.js',
   'src/components/TrelloQuery.js',
   'src/components/TrelloRouter.js',
-  'src/components/CreateNewBoard.js',
   'src/components/CreateNewList.js'
 ]
 

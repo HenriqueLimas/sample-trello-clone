@@ -14,6 +14,7 @@ const entries = [
   'tc-header',
   'tc-boards',
   'tc-board-details',
+  'tc-create-new-board',
 ]
 
 const buildJs = entry => {
