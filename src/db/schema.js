@@ -2,7 +2,8 @@ const DB_VERSION = 1
 
 export const tables = {
   BOARDS: 'Boards',
-  LISTS: 'Lists'
+  LISTS: 'Lists',
+  CARDS: 'Cards'
 }
 
 const initializeSchema = db => {
@@ -25,6 +26,20 @@ const initializeSchema = db => {
     .addForeignKey('fk_boards_id', {
       local: 'id_board',
       ref: `${tables.BOARDS}.id_board`
+    })
+
+  // Cards
+  //
+  schema.createTable(tables.CARDS)
+    .addColumn('id_card', db.Type.STRING)
+    .addColumn('id_list', db.Type.STRING)
+    .addColumn('title', db.Type.STRING)
+    .addColumn('description', db.Type.STRING)
+    .addNullable(['description'])
+    .addPrimaryKey(['id_card'])
+    .addForeignKey('fk_list_id', {
+      local: 'id_list',
+      ref: `${tables.LISTS}.id_list`
     })
 
   return schema

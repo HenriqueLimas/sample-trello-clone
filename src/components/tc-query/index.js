@@ -3,6 +3,7 @@ import initializeSchema from '../../db/schema'
 
 import BoardModel from '../../models/Boards'
 import ListModel from '../../models/Lists'
+import CardModel from '../../models/Cards'
 
 class TrelloQuery extends HTMLElement {
   constructor() {
@@ -26,6 +27,7 @@ class TrelloQuery extends HTMLElement {
         .then(database => {
           this.boards = new BoardModel(database)
           this.lists = new ListModel(database)
+          this.cards = new CardModel(database)
 
           this.db = database
           this.initialized = true
@@ -94,18 +96,24 @@ class TrelloQuery extends HTMLElement {
     return this.db.unobserve(query, callback)
   }
 
-  fetchLists(id_board) {
-    return this.lists
-      .getListsQuery(id_board)
-      .exec()
-      .then(results => {
-        this.results.lists = results
-        return results
-      })
-  }
-
   addList({ id_board, name }) {
     return this.lists.add({ id_board, name })
+  }
+
+  getCardsQuery(id_list) {
+    return this.cards.getAll(id_list)
+  }
+
+  addCard({ id_list, title }) {
+    return this.cards.add({ id_list, title })
+  }
+
+  moveCard({ id_card, id_list }) {
+    return this.cards.moveCard({ id_card, id_list })
+  }
+
+  updateCard(card) {
+    return this.cards.update(card)
   }
 }
 
