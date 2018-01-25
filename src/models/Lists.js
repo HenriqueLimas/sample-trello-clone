@@ -22,6 +22,6 @@ export default class Lists extends Base {
       name
     })
 
-    return this.db.insertOrReplace().into(this.table).values([row]).exec();
+    return this.db.insertOrReplace().into(this.table).values([row]).exec()
   }
 }

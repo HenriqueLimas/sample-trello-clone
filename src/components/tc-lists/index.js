@@ -82,10 +82,13 @@ class Lists extends ShadowElement {
 
   update() {
     this.listsToAdd
-      .map(this.createListElement)
-      .forEach(element => {
+      .forEach(list => {
+        const element = this.createListElement(list)
         this.$.list.insertBefore(element, this.$.createList)
+        this.boardLists.add(list.id_list)
       })
+
+    this.listsToAdd = []
   }
 }
 
