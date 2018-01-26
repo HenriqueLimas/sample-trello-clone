@@ -9,3 +9,17 @@
   width: 100%;
   max-width: 300px;
 }
+
+@mixin textarea {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  overflow-y: auto;
+  word-wrap: break-word;
+  width: 100%;
+
+  &:focus {
+    outline: 0;
+  }
+}

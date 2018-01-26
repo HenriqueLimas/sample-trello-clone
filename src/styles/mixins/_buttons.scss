@@ -1,0 +1,28 @@
+@import '../variables';
+
+@mixin button($color) {
+  $dark-color: darken($color, 10%);
+  background: $color;
+  color: $white;
+  box-shadow: 0 1px 0 $dark-color;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  padding: 4px 16px;
+  margin-top: 0;
+  margin-bottom: 0;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  border-radius: $border-radius;
+  transition: background .3s ease;
+  min-height: 32px;
+  font-weight: 700;
+
+  &:focus {
+    outline: 0;
+  }
+
+  &:focus, &:hover {
+    background: $dark-color 100%;
+  }
+}

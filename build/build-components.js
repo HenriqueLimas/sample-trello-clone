@@ -18,10 +18,13 @@ const entries = [
   'tc-board-details',
   'tc-create-new-board',
   'tc-create-new-list',
+  'tc-create-new-card',
   'tc-list',
   'tc-lists',
+  'tc-cards',
   'tc-query',
   'tc-router',
+  'tc-cards',
 ]
 
 const buildStyles = (entry, template) => {

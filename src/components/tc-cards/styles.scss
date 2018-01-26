@@ -1,0 +1,28 @@
+@import '../../styles/mixins/reboot';
+@import '../../styles/mixins/fonts';
+@import '../../styles/variables';
+
+@include reboot() {
+  $card-item-width: 100%;
+  $card-item-margin: 5px;
+
+  :host {
+    @include font-styles;
+
+    display: block;
+  }
+
+  .cards {
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  .card-item {
+    width: $card-item-width;
+    margin-bottom: $card-item-margin;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

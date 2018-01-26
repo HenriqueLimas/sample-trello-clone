@@ -39,9 +39,11 @@ class List extends ShadowElement {
 
   init() {
     this.$.name = this.shadowRoot.querySelector('.js-list-name')
-    this.$.cardList = this.shadowRoot.querySelector('.js-card-list')
+    this.$.cardList = this.shadowRoot.querySelector('tc-cards')
 
     this.$.name.textContent = this.name
+
+    this.$.cardList.listId = this.listId
   }
 }
 

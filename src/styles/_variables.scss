@@ -20,10 +20,13 @@ $breakpoints: (
 $white: #fff;
 $black: #000;
 $gray: #e2e4e6;
+$dark-gray: darken($gray, 30%);
+$green: #5aac44;
 $primary: transparentize($white, 0.3);
 $secondary: #026aa7;
 $third: #0079bf;
 $border-color: #afafaf;
+$success: $green;
 
 //
 // Fonts

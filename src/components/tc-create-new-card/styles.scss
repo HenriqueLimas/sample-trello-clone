@@ -1,0 +1,55 @@
+@import '../../styles/variables';
+@import '../../styles/mixins/reboot';
+@import '../../styles/mixins/forms';
+@import "../../styles/mixins/buttons";
+@import "../../styles/mixins/cards";
+@import "../../styles/mixins/fonts";
+
+@include reboot() {
+  $margin: 10px;
+
+  :host {
+    @include font-styles;
+
+    display: block;
+    width: 100%;
+    font-size: $font-size-sm;
+    text-align: left;
+
+    margin-top: $margin;
+  }
+
+  a, a:visited {
+    text-decoration: none;
+    color: $dark-gray;
+  }
+
+  form, .create-new-card {
+    display: none;
+  }
+
+  .card-field {
+    @include card-board($white);
+
+    color: $black;
+  }
+
+  textarea {
+    @include textarea;
+
+    min-height: 54px;
+    max-height: 160px;
+  }
+
+  .add {
+    @include button($success);
+  }
+
+  .visible {
+    display: block;
+  }
+
+  .form-actions {
+    margin-bottom: $margin;
+  }
+}
