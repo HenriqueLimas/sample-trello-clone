@@ -1,0 +1,28 @@
+@import '../../styles/mixins/reboot';
+@import '../../styles/mixins/cards';
+@import "../../styles/mixins/fonts";
+@import '../../styles/variables';
+
+@include reboot() {
+  :host {
+    @include font-styles;
+
+    display: block;
+    width: 100%;
+
+    text-align: left;
+    font-size: $font-size-sm;
+  }
+
+  .card {
+    @include card-board($white);
+
+    color: $black;
+    min-height: 0;
+    margin-top: $gutter / 2;
+  }
+
+  .card-title {
+    margin: 0;
+  }
+}

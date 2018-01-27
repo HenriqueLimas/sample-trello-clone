@@ -1,5 +1,4 @@
 import ShadowElement from '../ShadowElement'
-import withQuery from '../withQuery'
 
 class List extends ShadowElement {
   constructor() {
@@ -9,8 +8,6 @@ class List extends ShadowElement {
       name: null,
       cardList: null
     }
-
-    this.cards = new Set()
 
     this.init = this.init.bind(this)
   }
@@ -47,4 +44,4 @@ class List extends ShadowElement {
   }
 }
 
-window.customElements.define('tc-list', withQuery(List))
+window.customElements.define('tc-list', List)

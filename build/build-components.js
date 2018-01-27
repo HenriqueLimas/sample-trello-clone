@@ -21,6 +21,7 @@ const entries = [
   'tc-create-new-card',
   'tc-list',
   'tc-lists',
+  'tc-card',
   'tc-cards',
   'tc-query',
   'tc-router',

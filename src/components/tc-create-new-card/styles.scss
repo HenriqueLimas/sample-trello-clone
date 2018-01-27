@@ -6,7 +6,7 @@
 @import "../../styles/mixins/fonts";
 
 @include reboot() {
-  $margin: 10px;
+  $margin: $gutter / 2;
 
   :host {
     @include font-styles;

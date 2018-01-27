@@ -56,6 +56,13 @@ class Cards extends ShadowElement {
   }
 
   updateCards(changes) {
+    const cardsFromDB = changes[0].object
+
+    this.cardsToAdd = cardsFromDB.filter(card => {
+      return !this.cardLists.has(card.id_card)
+    })
+
+    this.update()
   }
 
   createCardElement(card) {
@@ -76,7 +83,7 @@ class Cards extends ShadowElement {
     this.cardsToAdd
       .forEach(card => {
         const element = this.createCardElement(card)
-        this.$cards.insertBefore(element, this.$.createCard)
+        this.$.cards.insertBefore(element, this.$.createCard)
         this.cardLists.add(card.id_card)
       })
 
