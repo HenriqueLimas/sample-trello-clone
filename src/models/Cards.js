@@ -42,4 +42,12 @@ export default class Cards extends Base {
       .where(this.table.id_card.eq(card.id_card))
       .exec()
   }
+
+  removeCard(id_card) {
+    return this.db
+      .delete()
+      .from(this.table)
+      .where(this.table.id_card.eq(id_card))
+      .exec()
+  }
 }

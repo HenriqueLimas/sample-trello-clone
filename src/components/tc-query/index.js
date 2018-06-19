@@ -115,6 +115,10 @@ class TrelloQuery extends HTMLElement {
   updateCard(card) {
     return this.cards.update(card)
   }
+
+  removeCard(id_card) {
+    return this.cards.removeCard(id_card)
+  }
 }
 
 window.customElements.define('trello-query', TrelloQuery)

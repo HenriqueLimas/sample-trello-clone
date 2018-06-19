@@ -1,6 +1,7 @@
-@import '../../styles/mixins/reboot';
-@import '../../styles/mixins/cards';
+@import "../../styles/mixins/buttons";
 @import "../../styles/mixins/fonts";
+@import '../../styles/mixins/cards';
+@import '../../styles/mixins/reboot';
 @import '../../styles/variables';
 
 @include reboot() {
@@ -20,9 +21,19 @@
     color: $black;
     min-height: 0;
     margin-top: $gutter / 2;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .card-title {
     margin: 0;
+  }
+
+  .card-remove-button {
+    @include button($red)
+
+    font-size: $font-size-sm;
   }
 }

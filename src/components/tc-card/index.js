@@ -1,4 +1,5 @@
 import ShadowElement from '../ShadowElement'
+import withQuery from '../withQuery'
 
 class Card extends ShadowElement {
   constructor() {
@@ -7,6 +8,8 @@ class Card extends ShadowElement {
     this.$ = {
       title: null
     }
+
+    this.handleRemoveButton = this.handleRemoveButton.bind(this)
   }
 
   get title() {
@@ -31,11 +34,22 @@ class Card extends ShadowElement {
     })
   }
 
+  disconnectedCallback() {
+    this.$.removeButton.removeEventListener('click', this.handleRemoveButton)
+  }
+
   init() {
     this.$.title = this.shadowRoot.querySelector('.js-card-title')
+    this.$.removeButton = this.shadowRoot.querySelector('.js-card-remove-button')
 
     this.$.title.textContent = this.title
+
+    this.$.removeButton.addEventListener('click', this.handleRemoveButton)
+  }
+
+  handleRemoveButton(event) {
+    this.query.removeCard(this.cardId)
   }
 }
 
-window.customElements.define('tc-card', Card)
+window.customElements.define('tc-card', withQuery(Card))

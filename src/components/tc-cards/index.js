@@ -56,11 +56,15 @@ class Cards extends ShadowElement {
   }
 
   updateCards(changes) {
-    const cardsFromDB = changes[0].object
+    const change = changes[0] || {}
+    const cardsFromDB = change.object
+    const cardsFromDBToRemove = change.removed || []
 
     this.cardsToAdd = cardsFromDB.filter(card => {
       return !this.cardLists.has(card.id_card)
     })
+
+    this.cardsToRemove = cardsFromDBToRemove
 
     this.update()
   }
@@ -85,6 +89,13 @@ class Cards extends ShadowElement {
         const element = this.createCardElement(card)
         this.$.cards.insertBefore(element, this.$.createCard)
         this.cardLists.add(card.id_card)
+      })
+
+    this.cardsToRemove
+      .map(card => this.$.cards.querySelector(`[card="${card.id_card}"]`))
+      .filter(Boolean)
+      .forEach($card => {
+        $card.parentNode.removeChild($card)
       })
 
     this.cardsToAdd = []
