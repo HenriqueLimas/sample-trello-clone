@@ -1,4 +1,4 @@
-# Trello Clone (:construction: Working in progress :construction:)
+# Trello Clone
 
 A simple Trello Clone using latest Web standards
 
