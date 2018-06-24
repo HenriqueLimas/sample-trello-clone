@@ -15,6 +15,8 @@ class Cards extends ShadowElement {
     this.init = this.init.bind(this)
     this.updateCards = this.updateCards.bind(this)
     this.createCardElement = this.createCardElement.bind(this)
+    this.handleDrop = this.handleDrop.bind(this)
+    this.handleDragover = this.handleDragover.bind(this)
   }
 
   get listId() {
@@ -37,6 +39,9 @@ class Cards extends ShadowElement {
 
   disconnectedCallback() {
     this.query.unobserve(this.queryCards, this.updateCards)
+
+    this.removeEventListener('drop', this.handleDrop)
+    this.removeEventListener('dragover', this.handleDragover)
   }
 
   init() {
@@ -53,6 +58,24 @@ class Cards extends ShadowElement {
     this.queryCards.exec()
 
     this.query.removeEventListener(this.query.events.INITIALIZED, this.init)
+
+    this.$.cards.addEventListener('drop', this.handleDrop)
+    this.$.cards.addEventListener('dragover', this.handleDragover)
+  }
+
+  handleDrop(event) {
+    event.preventDefault()
+    const id_card = event.dataTransfer.getData('text')
+
+    this.query.moveCard({
+      id_card,
+      id_list: this.listId
+    })
+  }
+
+  handleDragover(event) {
+    event.preventDefault()
+    event.dataTransfer.dropeffect = 'move'
   }
 
   updateCards(changes) {
@@ -65,6 +88,10 @@ class Cards extends ShadowElement {
     })
 
     this.cardsToRemove = cardsFromDBToRemove
+      .map(card => {
+        this.cardLists.delete(card.id_card)
+        return card
+      })
 
     this.update()
   }

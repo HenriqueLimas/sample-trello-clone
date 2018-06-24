@@ -10,6 +10,7 @@ class Card extends ShadowElement {
     }
 
     this.handleRemoveButton = this.handleRemoveButton.bind(this)
+    this.handleDragStart = this.handleDragStart.bind(this)
   }
 
   get title() {
@@ -36,6 +37,7 @@ class Card extends ShadowElement {
 
   disconnectedCallback() {
     this.$.removeButton.removeEventListener('click', this.handleRemoveButton)
+    this.removeEventListener('dragstart', this.handleDragStart)
   }
 
   init() {
@@ -45,10 +47,15 @@ class Card extends ShadowElement {
     this.$.title.textContent = this.title
 
     this.$.removeButton.addEventListener('click', this.handleRemoveButton)
+    this.addEventListener('dragstart', this.handleDragStart)
   }
 
   handleRemoveButton(event) {
     this.query.removeCard(this.cardId)
+  }
+
+  handleDragStart(event) {
+    event.dataTransfer.setData('text', this.cardId)
   }
 }
 
